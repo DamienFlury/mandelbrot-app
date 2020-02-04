@@ -3,8 +3,8 @@ import * as math from 'mathjs';
 type Props = {
   width: number;
   height: number;
-  x: number;
-  y: number;
+  reRange: NumberTuple,
+  imRange: NumberTuple,
 };
 
 const diverges = (num: math.Complex) => {
@@ -30,13 +30,13 @@ type MapProps = {
 const map = ({ x, origin: [min, max], target: [newMin, newMax] }: MapProps) =>
   ((x - min) / (max - min)) * (newMax - newMin) + newMin;
 
-const generateMandelbrot = ({ width, height, x, y }: Props) => {
+const generateMandelbrot = ({ width, height, reRange, imRange }: Props) => {
   const mandelbrotSet: boolean[] = [];
 
   for (let i = 0; i < width; i += 1) {
     for (let j = 0; j < height; j += 1) {
-      const re = map({ x: i, origin: [0, width], target: [-2, 2]});
-      const im = map({ x: j, origin: [0, height], target: [-2, 2]});
+      const re = map({ x: i, origin: [0, width], target: reRange});
+      const im = map({ x: j, origin: [0, height], target: imRange});
 
       const z = math.complex(re, im);
       mandelbrotSet.push(diverges(z));

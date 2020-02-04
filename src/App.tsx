@@ -6,7 +6,7 @@ const App = () => {
   const ref = useRef<HTMLCanvasElement | null>(null);
   const width = 400;
   const height = 400;
-  const mandelbrotSet = generateMandelbrot({ width, height, x: -2, y: -2});
+  const mandelbrotSet = generateMandelbrot({ width, height, reRange: [-1.5, 1.5], imRange: [-1.5, 1.5]});
   // console.log(mandelbrotSet);
   useEffect(() => {
     const canv = ref.current;
